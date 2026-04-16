@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#f5f5f5">
+
+    <!-- 游戏标题 -->
+    <TextView
+        android:id="@+id/tv_game_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Space Colony"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="16dp"
+        android:textColor="#1976d2" />
+
+    <!-- 游戏统计 -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="8dp">
+        <TextView
+            android:id="@+id/tv_game_stats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textSize="14sp"
+            android:lineSpacingExtra="8dp" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- 菜单按钮 -->
+    <Button
+        android:id="@+id/btn_quarters"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="10dp"
+        android:text="🏛️ 宿舍"
+        android:textSize="18sp"
+        android:background="#1976d2"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/btn_simulator"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="10dp"
+        android:text="⚙️ 模拟训练器"
+        android:textSize="18sp"
+        android:background="#388e3c"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/btn_mission_control"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="10dp"
+        android:text="⚔️ 任务控制"
+        android:textSize="18sp"
+        android:background="#d32f2f"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/btn_training_center"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="10dp"
+        android:text="✨ 训练中心"
+        android:textSize="18sp"
+        android:background="#f57f17"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/btn_settings"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="⚙️ 设置"
+        android:textSize="18sp"
+        android:background="#424242"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

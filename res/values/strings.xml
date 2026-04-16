@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 应用名称 -->
+    <string name="app_name">Space Colony</string>
+    
+    <!-- 主菜单 -->
+    <string name="menu_quarters">🏛️ 宿舍</string>
+    <string name="menu_simulator">⚙️ 模拟训练器</string>
+    <string name="menu_mission">⚔️ 任务控制</string>
+    <string name="menu_training">✨ 训练中心</string>
+    <string name="menu_settings">⚙️ 设置</string>
+    
+    <!-- 通用按钮 -->
+    <string name="btn_back">返回</string>
+    <string name="btn_start">开始</string>
+    <string name="btn_upgrade">升级</string>
+    <string name="btn_train">训练</string>
+    
+    <!-- 标签 -->
+    <string name="label_crew">宇航员</string>
+    <string name="label_missions">已完成任务</string>
+    <string name="label_victories">胜利</string>
+    <string name="label_energy">能量</string>
+    <string name="label_skill">技能</string>
+    <string name="label_experience">经验</string>
+    <string name="label_crystal">晶体</string>
+</resources>
