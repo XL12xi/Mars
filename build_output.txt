@@ -1,7 +1,0 @@
-﻿Latest relevant build result:
-
-assembleDebug completed successfully after the Android configuration and source cleanup work.
-
-For current build output, run:
-
-.\gradlew.bat assembleDebug
