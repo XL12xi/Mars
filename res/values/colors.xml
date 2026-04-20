@@ -1,34 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Material Design 颜色 -->
-    <!-- 主要颜色 -->
     <color name="primary">#1976d2</color>
     <color name="primary_light">#42a5f5</color>
     <color name="primary_dark">#1565c0</color>
-    
-    <!-- 辅助颜色 -->
+
     <color name="secondary">#388e3c</color>
     <color name="secondary_light">#66bb6a</color>
     <color name="secondary_dark">#2e7d32</color>
-    
-    <!-- 背景颜色 -->
+
     <color name="background">#f5f5f5</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
-    
-    <!-- 文本颜色 -->
+
     <color name="text_primary">#212121</color>
     <color name="text_secondary">#666666</color>
     <color name="text_hint">#999999</color>
-    
-    <!-- 按钮颜色 -->
+
     <color name="btn_quarters">#1976d2</color>
     <color name="btn_simulator">#388e3c</color>
     <color name="btn_mission">#d32f2f</color>
     <color name="btn_training">#f57f17</color>
     <color name="btn_settings">#424242</color>
-    
-    <!-- 其他 -->
+
     <color name="error">#d32f2f</color>
     <color name="warning">#f57f17</color>
     <color name="success">#388e3c</color>

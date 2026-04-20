@@ -19,6 +19,8 @@ public abstract class CrewMember implements Serializable {
 
     protected int missionsCompleted = 0;
     protected int victoriesCount = 0;
+    protected int lossesCount = 0;
+    protected int medbayVisits = 0;
     protected int trainingSessions = 0;
 
     protected int skillCrystalsOwned = 0;
@@ -149,6 +151,14 @@ public abstract class CrewMember implements Serializable {
         this.victoriesCount++;
     }
 
+    public void addLoss() {
+        this.lossesCount++;
+    }
+
+    public void addMedbayVisit() {
+        this.medbayVisits++;
+    }
+
     public int getId() { return id; }
     public String getName() { return name; }
     public String getSpecialization() { return specialization; }
@@ -174,6 +184,10 @@ public abstract class CrewMember implements Serializable {
     public void setMissionsCompleted(int count) { missionsCompleted = Math.max(0, count); }
     public int getVictoriesCount() { return victoriesCount; }
     public void setVictoriesCount(int count) { victoriesCount = Math.max(0, count); }
+    public int getLossesCount() { return lossesCount; }
+    public void setLossesCount(int count) { lossesCount = Math.max(0, count); }
+    public int getMedbayVisits() { return medbayVisits; }
+    public void setMedbayVisits(int count) { medbayVisits = Math.max(0, count); }
     public int getTrainingSessions() { return trainingSessions; }
 
     public int getSkillCrystalsOwned() { return skillCrystalsOwned; }

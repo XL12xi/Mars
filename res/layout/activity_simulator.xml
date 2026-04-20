@@ -2,49 +2,47 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f5f5f5"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#f5f5f5">
+    android:padding="16dp">
 
-    <!-- 标题 -->
     <TextView
         android:id="@+id/tv_simulator_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="模拟训练器"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:padding="16dp"
+        android:text="Simulator"
         android:textColor="#388e3c"
-        android:padding="16dp" />
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
-    <!-- 已选择的宇航员 -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp">
+
         <LinearLayout
             android:id="@+id/ll_selected_crew"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/white"
             android:orientation="vertical"
-            android:padding="8dp"
-            android:background="@android:color/white" />
+            android:padding="8dp" />
     </ScrollView>
 
-    <!-- RecyclerView 显示宇航员列表 -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_crew_simulator"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:layout_weight="1" />
 
-    <!-- 训练日志 -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginBottom="16dp"
         android:background="@android:color/white">
+
         <TextView
             android:id="@+id/tv_training_log"
             android:layout_width="match_parent"
@@ -53,41 +51,32 @@
             android:textSize="12sp" />
     </ScrollView>
 
-    <!-- 按钮容器 -->
-    <LinearLayout
+    <Button
+        android:id="@+id/btn_train"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:spacing="8dp">
-        <Button
-            android:id="@+id/btn_train"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="训练"
-            android:textSize="16sp"
-            android:background="#388e3c"
-            android:textColor="@android:color/white"
-            android:layout_marginEnd="8dp" />
-        <Button
-            android:id="@+id/btn_clear_selection"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="清除选择"
-            android:textSize="16sp"
-            android:background="#f57f17"
-            android:textColor="@android:color/white"
-            android:layout_marginEnd="8dp" />
-        <Button
-            android:id="@+id/btn_back"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="返回"
-            android:textSize="16sp"
-            android:background="#424242"
-            android:textColor="@android:color/white" />
-    </LinearLayout>
+        android:layout_marginBottom="8dp"
+        android:background="#388e3c"
+        android:text="Train"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
 
+    <Button
+        android:id="@+id/btn_clear_selection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="#f57f17"
+        android:text="Clear Selection"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#424242"
+        android:text="Back"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
 </LinearLayout>

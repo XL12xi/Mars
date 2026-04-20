@@ -65,6 +65,21 @@ public class SkillUpgradeManager implements Serializable {
         return true;
     }
 
+    public boolean upgradeSkillWithExternalPayment(String skillName) {
+        if (!skillLevels.containsKey(skillName)) {
+            return false;
+        }
+
+        int currentLevel = skillLevels.get(skillName);
+        if (currentLevel >= 5) {
+            return false;
+        }
+
+        totalCrystalsSpent += getUpgradeCost(skillName);
+        skillLevels.put(skillName, currentLevel + 1);
+        return true;
+    }
+
     public int getSkillLevel(String skillName) {
         return skillLevels.getOrDefault(skillName, 1);
     }

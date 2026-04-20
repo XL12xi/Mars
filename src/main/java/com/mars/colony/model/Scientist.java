@@ -1,12 +1,12 @@
 package com.mars.colony.model;
 
 /**
- * Scientist (科学家) - 技能8, 韧性1, 能量17
+ * Scientist crew member. Can mark analysis bonuses against matching threats.
  */
 public class Scientist extends CrewMember {
     private static final long serialVersionUID = 1L;
     private boolean analysisActive = false;
-    
+
     public Scientist(int id, String name, int imageResource) {
         super(id, name, "Scientist", 8, 1, 17, imageResource);
     }

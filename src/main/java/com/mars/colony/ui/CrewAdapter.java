@@ -3,6 +3,7 @@ package com.mars.colony.ui;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,12 +36,23 @@ public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CrewMember crew = crewList.get(position);
 
+        if (crew.getImageResource() != 0) {
+            holder.ivCrewImage.setImageResource(crew.getImageResource());
+        }
         holder.tvName.setText(crew.getName());
         holder.tvSpecialization.setText("Role: " + crew.getSpecialization());
         holder.tvSkill.setText(String.format("Skill: %d", crew.getSkill()));
         holder.tvResilience.setText(String.format("Resilience: %d", crew.getResilience()));
         holder.tvEnergy.setText(String.format("Energy: %d/%d", crew.getEnergy(), crew.getMaxEnergy()));
-        holder.tvExperience.setText(String.format("Experience: %d", crew.getExperience()));
+        holder.tvExperience.setText(String.format(
+                "Experience: %d | Missions: %d | Wins: %d | Losses: %d | Win rate: %.1f%% | Medbay: %d",
+                crew.getExperience(),
+                crew.getMissionsCompleted(),
+                crew.getVictoriesCount(),
+                crew.getLossesCount(),
+                crew.getWinRate(),
+                crew.getMedbayVisits()
+        ));
 
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
@@ -61,9 +73,11 @@ public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.ViewHolder> {
         TextView tvResilience;
         TextView tvEnergy;
         TextView tvExperience;
+        ImageView ivCrewImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            ivCrewImage = itemView.findViewById(R.id.iv_crew_image);
             tvName = itemView.findViewById(R.id.tv_crew_name);
             tvSpecialization = itemView.findViewById(R.id.tv_crew_specialization);
             tvSkill = itemView.findViewById(R.id.tv_crew_skill);

@@ -1,12 +1,11 @@
 package com.mars.colony.ability;
 
 import com.mars.colony.model.CrewMember;
-import com.mars.colony.model.Threat;
 import com.mars.colony.model.Soldier;
+import com.mars.colony.model.Threat;
 
 /**
- * Soldier技能 - 【绝对打击】
- * 自动触发,40%概率造成2倍伤害
+ * Soldier ability: passive chance to mark the next attack as a critical strike.
  */
 public class SoldierCriticalStrike implements SpecialAbility {
     private static final float BASE_CRIT_RATE = 0.4f;
@@ -23,8 +22,9 @@ public class SoldierCriticalStrike implements SpecialAbility {
 
     @Override
     public void executeAbility(CrewMember crew, Threat threat, CrewMember ally) {
-        if (!(crew instanceof Soldier)) return;
-        ((Soldier)crew).setCriticalActive(true);
+        if (crew instanceof Soldier) {
+            ((Soldier) crew).setCriticalActive(true);
+        }
     }
 
     @Override
@@ -34,8 +34,11 @@ public class SoldierCriticalStrike implements SpecialAbility {
 
     @Override
     public String getAbilityDescription() {
-        return String.format("%.0f%% chance for %.1fx damage", 
-                getEffectiveRate() * 100, getEffectiveDamageMultiplier());
+        return String.format(
+                "%.0f%% chance for %.1fx damage",
+                getEffectiveRate() * 100,
+                getEffectiveDamageMultiplier()
+        );
     }
 
     @Override
@@ -44,9 +47,6 @@ public class SoldierCriticalStrike implements SpecialAbility {
     @Override
     public void setLevel(int level) { this.level = Math.max(1, Math.min(level, 5)); }
 
-    /**
-     * 获得有效暴击率(考虑升级)
-     */
     public float getEffectiveRate() {
         float rate = BASE_CRIT_RATE;
         for (int i = 1; i < level; i++) {
@@ -55,9 +55,6 @@ public class SoldierCriticalStrike implements SpecialAbility {
         return Math.min(rate, 0.99f);
     }
 
-    /**
-     * 获得有效伤害倍数(考虑升级)
-     */
     public float getEffectiveDamageMultiplier() {
         return BASE_DAMAGE_MULT + (UPGRADE_DMG_INCREMENT * (level - 1));
     }

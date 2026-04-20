@@ -1,12 +1,11 @@
 package com.mars.colony.ability;
 
 import com.mars.colony.model.CrewMember;
-import com.mars.colony.model.Threat;
 import com.mars.colony.model.Medic;
+import com.mars.colony.model.Threat;
 
 /**
- * Medic技能 - 【急救】
- * 主动技能,消耗8能量恢复队友12能量
+ * Medic ability: spends energy to heal an ally, or self-heals if the ally is full.
  */
 public class MedicHealing implements SpecialAbility {
     private static final int HEAL_COST = 8;
@@ -18,23 +17,22 @@ public class MedicHealing implements SpecialAbility {
     public boolean canUse(CrewMember crew, Threat threat, CrewMember ally) {
         if (!(crew instanceof Medic)) return false;
         return crew.getEnergy() >= HEAL_COST &&
-               (crew.getEnergy() < crew.getMaxEnergy() ||
-                (ally != null && ally.getEnergy() < ally.getMaxEnergy()));
+                (crew.getEnergy() < crew.getMaxEnergy() ||
+                        (ally != null && ally.getEnergy() < ally.getMaxEnergy()));
     }
 
     @Override
     public void executeAbility(CrewMember crew, Threat threat, CrewMember ally) {
         if (!(crew instanceof Medic)) return;
-        
+
         crew.setEnergy(crew.getEnergy() - HEAL_COST);
-        
-        // 优先治疗队友,如果队友能量满就治疗自己
-        CrewMember target = (ally != null && ally.getEnergy() < ally.getMaxEnergy()) 
-                            ? ally : crew;
-        
+
+        CrewMember target = (ally != null && ally.getEnergy() < ally.getMaxEnergy())
+                ? ally
+                : crew;
+
         int healAmount = getEffectiveHealAmount();
-        int newEnergy = Math.min(target.getMaxEnergy(), 
-                                target.getEnergy() + healAmount);
+        int newEnergy = Math.min(target.getMaxEnergy(), target.getEnergy() + healAmount);
         target.setEnergy(newEnergy);
     }
 
@@ -54,9 +52,6 @@ public class MedicHealing implements SpecialAbility {
     @Override
     public void setLevel(int level) { this.level = Math.max(1, Math.min(level, 5)); }
 
-    /**
-     * 获得有效的治疗量(考虑升级)
-     */
     public int getEffectiveHealAmount() {
         return BASE_HEAL + (HEAL_INCREMENT * (level - 1));
     }

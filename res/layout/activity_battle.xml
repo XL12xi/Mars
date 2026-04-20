@@ -3,185 +3,149 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f5f5f5"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#f5f5f5">
+    android:padding="16dp">
 
-    <!-- 战斗标题 -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="⚔️ 战斗进行中"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#d32f2f"
         android:gravity="center"
-        android:padding="16dp" />
+        android:padding="16dp"
+        android:text="Battle"
+        android:textColor="#d32f2f"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
-    <!-- 战斗阶段和回合信息 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginBottom="12dp"
         android:gravity="center_vertical"
-        android:layout_marginBottom="12dp">
+        android:orientation="horizontal">
+
         <TextView
             android:id="@+id/tv_battle_phase"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="当前阶段: 初始化"
-            android:textSize="14sp"
-            android:textColor="#424242" />
+            android:text="Current phase: Initialization"
+            android:textColor="#424242"
+            android:textSize="14sp" />
+
         <TextView
             android:id="@+id/tv_round_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="第 1 回合"
-            android:textSize="14sp"
+            android:gravity="right"
+            android:text="Round 1"
             android:textColor="#424242"
-            android:gravity="right" />
+            android:textSize="14sp" />
     </LinearLayout>
 
-    <!-- 仓库水晶显示 -->
     <TextView
         android:id="@+id/tv_storage_crystals"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="水晶仓库: 0"
-        android:textSize="14sp"
-        android:textColor="#FF9800"
-        android:textStyle="bold"
+        android:layout_marginBottom="8dp"
         android:gravity="right"
         android:paddingEnd="8dp"
-        android:layout_marginBottom="8dp" />
+        android:text="Storage crystals: 0"
+        android:textColor="#FF9800"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
-    <!-- 战斗结果 -->
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        app:cardElevation="2dp"
-        app:cardCornerRadius="8dp">
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp">
+
         <TextView
             android:id="@+id/tv_battle_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:textSize="16sp"
-            android:textStyle="bold"
             android:gravity="center"
-            android:textColor="#388e3c" />
+            android:padding="12dp"
+            android:textColor="#388e3c"
+            android:textSize="16sp"
+            android:textStyle="bold" />
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- ===== 战斗状态区域 ===== -->
-    <LinearLayout
+    <TextView
+        android:id="@+id/tv_crew_a_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="12dp">
+        android:textColor="#1976d2"
+        android:textSize="13sp" />
 
-        <!-- 宇航员 A 状态 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp"
-            android:background="@android:color/white"
-            android:layout_marginBottom="8dp">
-            <TextView
-                android:id="@+id/tv_crew_a_status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="13sp"
-                android:textColor="#1976d2" />
-            <ProgressBar
-                android:id="@+id/pb_crew_a_health"
-                android:layout_width="match_parent"
-                android:layout_height="16dp"
-                android:layout_marginTop="4dp"
-                style="@android:style/Widget.ProgressBar.Horizontal" />
-        </LinearLayout>
+    <ProgressBar
+        android:id="@+id/pb_crew_a_health"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_marginBottom="8dp" />
 
-        <!-- 宇航员 B 状态 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp"
-            android:background="@android:color/white"
-            android:layout_marginBottom="8dp">
-            <TextView
-                android:id="@+id/tv_crew_b_status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="13sp"
-                android:textColor="#1976d2" />
-            <ProgressBar
-                android:id="@+id/pb_crew_b_health"
-                android:layout_width="match_parent"
-                android:layout_height="16dp"
-                android:layout_marginTop="4dp"
-                style="@android:style/Widget.ProgressBar.Horizontal" />
-        </LinearLayout>
+    <TextView
+        android:id="@+id/tv_crew_b_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#1976d2"
+        android:textSize="13sp" />
 
-        <!-- 威胁状态 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp"
-            android:background="@android:color/white">
-            <TextView
-                android:id="@+id/tv_threat_status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="13sp"
-                android:textColor="#d32f2f" />
-            <ProgressBar
-                android:id="@+id/pb_threat_health"
-                android:layout_width="match_parent"
-                android:layout_height="16dp"
-                android:layout_marginTop="4dp"
-                style="@android:style/Widget.ProgressBar.Horizontal" />
-        </LinearLayout>
+    <ProgressBar
+        android:id="@+id/pb_crew_b_health"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_marginBottom="8dp" />
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_threat_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#d32f2f"
+        android:textSize="13sp" />
 
-    <!-- 动作按钮容器 -->
+    <ProgressBar
+        android:id="@+id/pb_threat_health"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_marginBottom="12dp" />
+
     <LinearLayout
         android:id="@+id/ll_action_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginBottom="12dp"
+        android:orientation="vertical" />
 
-    <!-- 战斗日志 -->
     <ScrollView
         android:id="@+id/sv_battle_log"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginBottom="12dp"
+        android:layout_weight="1"
         android:background="@android:color/white">
+
         <TextView
             android:id="@+id/tv_battle_log"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:lineSpacingExtra="3dp"
             android:padding="8dp"
-            android:textSize="11sp"
-            android:lineSpacingExtra="3dp" />
+            android:textSize="11sp" />
     </ScrollView>
 
-    <!-- 返回按钮 -->
     <Button
         android:id="@+id/btn_return_to_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="返回菜单"
-        android:textSize="16sp"
         android:background="#424242"
+        android:padding="12dp"
+        android:text="Return to Menu"
         android:textColor="@android:color/white"
-        android:padding="12dp" />
-
+        android:textSize="16sp" />
 </LinearLayout>

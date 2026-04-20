@@ -37,6 +37,13 @@
             android:text="Quarters" />
 
         <Button
+            android:id="@+id/btn_recruit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Recruit Crew" />
+
+        <Button
             android:id="@+id/btn_simulator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

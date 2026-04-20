@@ -1,7 +1,6 @@
 package com.mars.colony.ui;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,9 +24,11 @@ public class SimulatorActivity extends AppCompatActivity {
     private TextView tvTrainingLog;
     private Button btnTrain;
     private Button btnClearSelection;
+    private Button btnMoveToQuarters;
     private Button btnBack;
     private LinearLayout llSelectedCrew;
 
+    private final List<CrewMember> simulatorCrew = new ArrayList<>();
     private final List<CrewMember> selectedCrew = new ArrayList<>();
 
     @Override
@@ -42,20 +43,20 @@ public class SimulatorActivity extends AppCompatActivity {
         tvTrainingLog = findViewById(R.id.tv_training_log);
         btnTrain = findViewById(R.id.btn_train);
         btnClearSelection = findViewById(R.id.btn_clear_selection);
+        btnMoveToQuarters = findViewById(R.id.btn_move_to_quarters);
         btnBack = findViewById(R.id.btn_back);
         llSelectedCrew = findViewById(R.id.ll_selected_crew);
 
-        tvSimulatorInfo.setText("Simulator - train crew for +1 to +3 experience at an energy cost");
         initializeRecyclerView();
 
         btnTrain.setOnClickListener(v -> trainSelectedCrew());
         btnClearSelection.setOnClickListener(v -> clearSelection());
+        btnMoveToQuarters.setOnClickListener(v -> moveSelectedCrewToQuarters());
         btnBack.setOnClickListener(v -> finish());
     }
 
     private void initializeRecyclerView() {
-        List<CrewMember> crewList = colony.getAllCrew();
-        crewCheckboxAdapter = new CrewCheckboxAdapter(crewList, (crew, isChecked) -> {
+        crewCheckboxAdapter = new CrewCheckboxAdapter(simulatorCrew, (crew, isChecked) -> {
             if (isChecked) {
                 if (!selectedCrew.contains(crew)) {
                     selectedCrew.add(crew);
@@ -68,6 +69,7 @@ public class SimulatorActivity extends AppCompatActivity {
 
         rvCrew.setLayoutManager(new LinearLayoutManager(this));
         rvCrew.setAdapter(crewCheckboxAdapter);
+        refreshCrewList();
     }
 
     private void updateSelectedDisplay() {
@@ -120,10 +122,51 @@ public class SimulatorActivity extends AppCompatActivity {
         crewCheckboxAdapter.notifyDataSetChanged();
     }
 
+    private void moveSelectedCrewToQuarters() {
+        if (selectedCrew.isEmpty()) {
+            Toast.makeText(this, "Select at least one crew member", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        List<CrewMember> crewToMove = new ArrayList<>(selectedCrew);
+        for (CrewMember crew : crewToMove) {
+            colony.moveCrewTo(crew.getId(), "QUARTERS");
+        }
+
+        Toast.makeText(
+                this,
+                "Moved " + crewToMove.size() + " crew to Quarters",
+                Toast.LENGTH_SHORT
+        ).show();
+        tvTrainingLog.setText("Moved selected crew to Quarters. Use Recover All there to restore energy.");
+        refreshCrewList();
+    }
+
     private void clearSelection() {
         selectedCrew.clear();
         crewCheckboxAdapter.clearAllChecked();
         updateSelectedDisplay();
         tvTrainingLog.setText("");
+    }
+
+    private void refreshCrewList() {
+        simulatorCrew.clear();
+        simulatorCrew.addAll(colony.getCrewByLocation("SIMULATOR"));
+        selectedCrew.clear();
+        crewCheckboxAdapter.clearAllChecked();
+        updateSelectedDisplay();
+        tvSimulatorInfo.setText(String.format(
+                "Simulator - %d crew assigned. Train selected crew for +1 to +3 experience.",
+                simulatorCrew.size()
+        ));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        colony = GameState.getColony();
+        if (crewCheckboxAdapter != null) {
+            refreshCrewList();
+        }
     }
 }

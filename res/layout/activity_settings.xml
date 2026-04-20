@@ -2,96 +2,69 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f5f5f5"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#f5f5f5">
+    android:padding="16dp">
 
-    <!-- 标题 -->
     <TextView
         android:id="@+id/tv_settings_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="设置"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:padding="16dp"
+        android:text="Settings"
         android:textColor="#424242"
-        android:padding="16dp" />
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
-    <!-- 声音设置 -->
-    <LinearLayout
+    <Switch
+        android:id="@+id/sw_sound_enabled"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="12dp"
+        android:layout_marginBottom="8dp"
         android:background="@android:color/white"
-        android:layout_marginBottom="8dp">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="声音"
-            android:textSize="16sp" />
-        <Switch
-            android:id="@+id/sw_sound_enabled"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+        android:padding="12dp"
+        android:text="Sound" />
 
-    <!-- 振动设置 -->
-    <LinearLayout
+    <Switch
+        android:id="@+id/sw_vibrate_enabled"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="12dp"
+        android:layout_marginBottom="16dp"
         android:background="@android:color/white"
-        android:layout_marginBottom="16dp">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="振动"
-            android:textSize="16sp" />
-        <Switch
-            android:id="@+id/sw_vibrate_enabled"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+        android:padding="12dp"
+        android:text="Vibration" />
 
-    <!-- 帮助按钮 -->
     <Button
         android:id="@+id/btn_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="关于"
-        android:textSize="16sp"
+        android:layout_marginBottom="10dp"
         android:background="#1976d2"
+        android:text="About"
         android:textColor="@android:color/white"
-        android:layout_marginBottom="10dp" />
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/btn_rules"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="游戏规则"
-        android:textSize="16sp"
+        android:layout_marginBottom="16dp"
         android:background="#1976d2"
+        android:text="Game Rules"
         android:textColor="@android:color/white"
-        android:layout_marginBottom="16dp" />
+        android:textSize="16sp" />
 
-    <!-- 占位符 -->
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <!-- 返回按钮 -->
     <Button
         android:id="@+id/btn_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="返回"
-        android:textSize="16sp"
         android:background="#424242"
-        android:textColor="@android:color/white" />
-
+        android:text="Back"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
 </LinearLayout>

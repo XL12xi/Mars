@@ -36,7 +36,7 @@ public class TrainingCenterActivity extends AppCompatActivity {
         tvCrystalInfo = findViewById(R.id.tv_crystal_info);
         btnBack = findViewById(R.id.btn_back);
 
-        tvTrainingCenterInfo.setText("Training Center - upgrade crew skills with crystals");
+        tvTrainingCenterInfo.setText("Training Center - spend colony storage crystals to upgrade crew abilities");
         initializeRecyclerView();
 
         btnBack.setOnClickListener(v -> finish());
@@ -47,6 +47,7 @@ public class TrainingCenterActivity extends AppCompatActivity {
 
         skillUpgradeAdapter = new SkillUpgradeAdapter(
                 crewList,
+                colony.getCrystalsInStorage(),
                 this::performUpgrade,
                 crew -> {
                     selectedCrew = crew;
@@ -64,33 +65,70 @@ public class TrainingCenterActivity extends AppCompatActivity {
     }
 
     private void performUpgrade(CrewMember crew, String skillName, SkillUpgradeManager upgradeManager) {
+        String expectedSkill = getUpgradeableSkillName(crew);
+        if (expectedSkill == null || !expectedSkill.equals(skillName)) {
+            Toast.makeText(this, "This crew cannot upgrade " + skillName, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         int cost = upgradeManager.getUpgradeCost(skillName);
         if (cost < 0) {
             Toast.makeText(this, skillName + " is already maxed out", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (upgradeManager.getSkillCrystalsOwned() < cost) {
+        int storageCrystals = colony.getCrystalsInStorage();
+        if (storageCrystals < cost) {
             Toast.makeText(
                     this,
-                    String.format("Not enough crystals for %s. Need %d, have %d", skillName, cost, upgradeManager.getSkillCrystalsOwned()),
+                    String.format("Not enough storage crystals for %s. Need %d, have %d", skillName, cost, storageCrystals),
                     Toast.LENGTH_SHORT
             ).show();
             return;
         }
 
-        if (upgradeManager.upgradeSkill(skillName)) {
+        if (upgradeManager.upgradeSkillWithExternalPayment(skillName)) {
+            colony.setCrystalsInStorage(storageCrystals - cost);
+            syncAbilityLevel(crew, skillName, upgradeManager);
             Toast.makeText(
                     this,
-                    String.format("%s upgraded. %s", skillName, upgradeManager.getSkillEffectDisplay(skillName)),
+                    String.format("%s upgraded for %d storage crystals. %s", skillName, cost, upgradeManager.getSkillEffectDisplay(skillName)),
                     Toast.LENGTH_SHORT
             ).show();
             selectedCrew = crew;
+            skillUpgradeAdapter.setStorageCrystals(colony.getCrystalsInStorage());
             skillUpgradeAdapter.notifyDataSetChanged();
             updateCrystalInfo();
         } else {
             Toast.makeText(this, "Upgrade failed", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private String getUpgradeableSkillName(CrewMember crew) {
+        switch (crew.getSpecialization()) {
+            case "Pilot":
+                return "Evasion";
+            case "Engineer":
+                return "Shield";
+            case "Medic":
+                return "Healing";
+            case "Scientist":
+                return "Analysis";
+            case "Soldier":
+                return "CriticalStrike";
+            case "Robot":
+                return "SelfRepair";
+            default:
+                return null;
+        }
+    }
+
+    private void syncAbilityLevel(CrewMember crew, String skillName, SkillUpgradeManager upgradeManager) {
+        if (crew.getSpecialAbility() == null) {
+            return;
+        }
+
+        crew.getSpecialAbility().setLevel(upgradeManager.getSkillLevel(skillName));
     }
 
     private void updateCrystalInfo() {
@@ -101,9 +139,9 @@ public class TrainingCenterActivity extends AppCompatActivity {
 
         SkillUpgradeManager mgr = selectedCrew.getSkillUpgradeManager();
         String info = String.format(
-                "Selected crew: %s%nCrystals: %d%nTotal spent: %d",
+                "Selected crew: %s%nColony storage crystals: %d%nCrew upgrade crystals spent: %d",
                 selectedCrew.getName(),
-                mgr.getSkillCrystalsOwned(),
+                colony.getCrystalsInStorage(),
                 mgr.getTotalCrystalsSpent()
         );
         tvCrystalInfo.setText(info);
@@ -112,7 +150,9 @@ public class TrainingCenterActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        colony = GameState.getColony();
         if (skillUpgradeAdapter != null) {
+            skillUpgradeAdapter.setStorageCrystals(colony.getCrystalsInStorage());
             skillUpgradeAdapter.notifyDataSetChanged();
             updateCrystalInfo();
         }

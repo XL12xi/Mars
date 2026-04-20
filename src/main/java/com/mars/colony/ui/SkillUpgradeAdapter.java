@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -15,18 +16,10 @@ import java.util.List;
 
 public class SkillUpgradeAdapter extends RecyclerView.Adapter<SkillUpgradeAdapter.ViewHolder> {
 
-    private static final String[][] SKILLS = {
-        {"Evasion", "Pilot dodge"},
-        {"Shield", "Engineer shield"},
-        {"Healing", "Medic heal"},
-        {"Analysis", "Scientist analysis"},
-        {"CriticalStrike", "Soldier crit"},
-        {"SelfRepair", "Robot repair"}
-    };
-
     private final List<CrewMember> crewList;
     private final OnSkillUpgradeListener upgradeListener;
     private final OnCrewSelectListener selectListener;
+    private int storageCrystals;
 
     public interface OnSkillUpgradeListener {
         void onUpgradeClick(CrewMember crew, String skillName, SkillUpgradeManager manager);
@@ -38,10 +31,12 @@ public class SkillUpgradeAdapter extends RecyclerView.Adapter<SkillUpgradeAdapte
 
     public SkillUpgradeAdapter(
             List<CrewMember> crewList,
+            int storageCrystals,
             OnSkillUpgradeListener upgradeListener,
             OnCrewSelectListener selectListener
     ) {
         this.crewList = crewList;
+        this.storageCrystals = storageCrystals;
         this.upgradeListener = upgradeListener;
         this.selectListener = selectListener;
     }
@@ -62,17 +57,44 @@ public class SkillUpgradeAdapter extends RecyclerView.Adapter<SkillUpgradeAdapte
             crew.setSkillUpgradeManager(upgradeManager);
         }
 
+        if (crew.getImageResource() != 0) {
+            holder.ivCrewImage.setImageResource(crew.getImageResource());
+        }
         holder.tvCrewName.setText(crew.getName());
         holder.tvCrewSpecialization.setText(crew.getSpecialization());
-        holder.tvCrystals.setText(String.format("Crystals: %d", upgradeManager.getSkillCrystalsOwned()));
+        holder.tvCrystals.setText(String.format("Storage crystals: %d", storageCrystals));
         holder.llSkills.removeAllViews();
 
         SkillUpgradeManager finalUpgradeManager = upgradeManager;
-        for (String[] skill : SKILLS) {
+        String[] skill = getUpgradeableSkill(crew);
+        if (skill == null) {
+            TextView empty = new TextView(holder.llSkills.getContext());
+            empty.setText("No upgradable ability available");
+            holder.llSkills.addView(empty);
+        } else {
             addSkillRow(holder.llSkills, crew, finalUpgradeManager, skill[0], skill[1]);
         }
 
         holder.itemView.setOnClickListener(v -> selectListener.onCrewSelect(crew));
+    }
+
+    private String[] getUpgradeableSkill(CrewMember crew) {
+        switch (crew.getSpecialization()) {
+            case "Pilot":
+                return new String[] {"Evasion", "Pilot evasion"};
+            case "Engineer":
+                return new String[] {"Shield", "Engineer shield"};
+            case "Medic":
+                return new String[] {"Healing", "Medic healing"};
+            case "Scientist":
+                return new String[] {"Analysis", "Scientist analysis"};
+            case "Soldier":
+                return new String[] {"CriticalStrike", "Soldier critical strike"};
+            case "Robot":
+                return new String[] {"SelfRepair", "Robot self repair"};
+            default:
+                return null;
+        }
     }
 
     private void addSkillRow(
@@ -101,7 +123,7 @@ public class SkillUpgradeAdapter extends RecyclerView.Adapter<SkillUpgradeAdapte
 
         Button button = new Button(container.getContext());
         button.setText(cost < 0 ? "MAX" : "Upgrade");
-        button.setEnabled(cost >= 0 && manager.getSkillCrystalsOwned() >= cost);
+        button.setEnabled(cost >= 0 && storageCrystals >= cost);
         button.setOnClickListener(v -> {
             selectListener.onCrewSelect(crew);
             upgradeListener.onUpgradeClick(crew, skillName, manager);
@@ -117,14 +139,20 @@ public class SkillUpgradeAdapter extends RecyclerView.Adapter<SkillUpgradeAdapte
         return crewList.size();
     }
 
+    public void setStorageCrystals(int storageCrystals) {
+        this.storageCrystals = storageCrystals;
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvCrewName;
         TextView tvCrewSpecialization;
         TextView tvCrystals;
         LinearLayout llSkills;
+        ImageView ivCrewImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            ivCrewImage = itemView.findViewById(R.id.iv_crew_image);
             tvCrewName = itemView.findViewById(R.id.tv_crew_name_upgrade);
             tvCrewSpecialization = itemView.findViewById(R.id.tv_crew_specialization_upgrade);
             tvCrystals = itemView.findViewById(R.id.tv_crystals);

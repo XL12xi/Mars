@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardElevation="4dp"
-    app:cardCornerRadius="8dp">
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,65 +13,45 @@
         android:orientation="vertical"
         android:padding="12dp">
 
-        <!-- 姓名 -->
         <TextView
             android:id="@+id/tv_crew_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:layout_marginBottom="4dp"
             android:textColor="#1976d2"
-            android:layout_marginBottom="4dp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-        <!-- 专业 -->
         <TextView
             android:id="@+id/tv_crew_specialization"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:layout_marginBottom="8dp"
             android:textColor="#666666"
-            android:layout_marginBottom="8dp" />
+            android:textSize="14sp" />
 
-        <!-- 属性一行 -->
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_crew_skill"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="4dp">
-            <TextView
-                android:id="@+id/tv_crew_skill"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="12sp" />
-            <TextView
-                android:id="@+id/tv_crew_resilience"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="12sp" />
-        </LinearLayout>
+            android:textSize="12sp" />
 
-        <!-- 能量一行 -->
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_crew_resilience"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="4dp">
-            <TextView
-                android:id="@+id/tv_crew_energy"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="12sp" />
-            <TextView
-                android:id="@+id/tv_crew_experience"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="12sp" />
-        </LinearLayout>
+            android:textSize="12sp" />
 
+        <TextView
+            android:id="@+id/tv_crew_energy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_crew_experience"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp" />
     </LinearLayout>
-
 </com.google.android.material.card.MaterialCardView>

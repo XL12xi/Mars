@@ -1,12 +1,12 @@
 package com.mars.colony.model;
 
 /**
- * Pilot (飞行员) - 技能5, 韧性4, 能量20
+ * Pilot crew member. Balanced durability with a passive evasion flag.
  */
 public class Pilot extends CrewMember {
     private static final long serialVersionUID = 1L;
     private boolean evaded = false;
-    
+
     public Pilot(int id, String name, int imageResource) {
         super(id, name, "Pilot", 5, 4, 20, imageResource);
     }

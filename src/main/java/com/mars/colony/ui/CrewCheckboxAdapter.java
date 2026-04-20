@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,15 +40,24 @@ public class CrewCheckboxAdapter extends RecyclerView.Adapter<CrewCheckboxAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CrewMember crew = crewList.get(position);
 
+        if (crew.getImageResource() != 0) {
+            holder.ivCrewImage.setImageResource(crew.getImageResource());
+        }
         holder.cbSelected.setOnCheckedChangeListener(null);
         holder.cbSelected.setText(crew.getName());
         holder.cbSelected.setChecked(checkedCrewIds.contains(crew.getId()));
         holder.tvSpecialization.setText("Role: " + crew.getSpecialization());
         holder.tvStatus.setText(String.format(
-                "Energy: %d/%d | Experience: %d",
+                "Energy: %d/%d | Experience: %d%nMissions: %d | Wins: %d | Losses: %d | Win rate: %.1f%%%nTraining: %d | Medbay visits: %d",
                 crew.getEnergy(),
                 crew.getMaxEnergy(),
-                crew.getExperience()
+                crew.getExperience(),
+                crew.getMissionsCompleted(),
+                crew.getVictoriesCount(),
+                crew.getLossesCount(),
+                crew.getWinRate(),
+                crew.getTrainingSessions(),
+                crew.getMedbayVisits()
         ));
 
         holder.cbSelected.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -74,9 +84,11 @@ public class CrewCheckboxAdapter extends RecyclerView.Adapter<CrewCheckboxAdapte
         CheckBox cbSelected;
         TextView tvSpecialization;
         TextView tvStatus;
+        ImageView ivCrewImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            ivCrewImage = itemView.findViewById(R.id.iv_crew_image);
             cbSelected = itemView.findViewById(R.id.cb_crew_selected);
             tvSpecialization = itemView.findViewById(R.id.tv_crew_specialization);
             tvStatus = itemView.findViewById(R.id.tv_crew_status);

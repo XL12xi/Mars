@@ -1,34 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- 应用主题 -->
     <style name="Theme.SpaceColony" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/secondary</item>
         <item name="android:background">@color/background</item>
     </style>
-    
-    <!-- 按钮样式 -->
+
     <style name="ButtonStyle" parent="Widget.AppCompat.Button">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:paddingVertical">12dp</item>
     </style>
-    
-    <!-- 标题样式 -->
+
     <style name="TitleTextStyle">
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/primary</item>
     </style>
-    
-    <!-- 副题样式 -->
+
     <style name="SubtitleTextStyle">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/text_secondary</item>
     </style>
-    
-    <!-- CardView样式 -->
+
     <style name="CardViewStyle" parent="CardView">
         <item name="cardElevation">4dp</item>
         <item name="cardCornerRadius">8dp</item>

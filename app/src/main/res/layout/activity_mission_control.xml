@@ -79,6 +79,13 @@
             android:text="Start Mission" />
 
         <Button
+            android:id="@+id/btn_return_selected_to_quarters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Return Selected to Quarters" />
+
+        <Button
             android:id="@+id/btn_back"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

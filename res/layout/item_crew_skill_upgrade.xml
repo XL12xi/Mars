@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardElevation="4dp"
-    app:cardCornerRadius="8dp">
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,50 +13,50 @@
         android:orientation="vertical"
         android:padding="12dp">
 
-        <!-- 宇航员头部信息 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginBottom="12dp"
-            android:padding="8dp"
-            android:background="#f5f5f5">
+            android:background="#f5f5f5"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/tv_crew_name_upgrade"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp"
                     android:textColor="#1976d2"
-                    android:layout_marginBottom="4dp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/tv_crew_specialization_upgrade"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:textColor="#666666" />
+                    android:textColor="#666666"
+                    android:textSize="12sp" />
             </LinearLayout>
+
             <TextView
                 android:id="@+id/tv_crystals"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#f57f17"
                 android:textSize="14sp"
-                android:textStyle="bold"
-                android:textColor="#f57f17" />
+                android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- 技能列表容器 -->
         <LinearLayout
             android:id="@+id/ll_skills"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
-
     </LinearLayout>
-
 </com.google.android.material.card.MaterialCardView>

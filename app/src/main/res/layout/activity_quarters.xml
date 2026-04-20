@@ -22,6 +22,20 @@
         android:layout_marginTop="12dp"
         android:text="Recover All Crew" />
 
+    <Button
+        android:id="@+id/btn_move_to_simulator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Move Selected to Simulator" />
+
+    <Button
+        android:id="@+id/btn_move_to_mission_control"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Move Selected to Mission Control" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_crew"
         android:layout_width="match_parent"

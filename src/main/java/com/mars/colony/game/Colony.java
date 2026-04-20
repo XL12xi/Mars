@@ -15,8 +15,6 @@ public class Colony implements Serializable {
 
     private int missionCount = 0;
     private static int missionsCompleted = 0;
-    
-    // ✨ 全球水晶仓库 - 所有掉落的水晶进入这里
     private int crystalStorage = 0;
 
     public Colony() {
@@ -40,7 +38,6 @@ public class Colony implements Serializable {
         switch (location.toUpperCase()) {
             case "QUARTERS":
                 quarters.add(crew);
-                crew.recover();
                 break;
             case "SIMULATOR":
                 simulator.add(crew);
@@ -51,7 +48,6 @@ public class Colony implements Serializable {
             default:
                 quarters.add(crew);
                 crew.setLocation("QUARTERS");
-                crew.recover();
                 break;
         }
     }
@@ -147,34 +143,28 @@ public class Colony implements Serializable {
         );
     }
 
-    // ===== 水晶仓库管理 =====
-
-    /**
-     * 向仓库添加水晶（由战斗系统调用）
-     */
     public void addCrystalsToStorage(int amount) {
         if (amount > 0) {
             this.crystalStorage += amount;
-            System.out.println(String.format("[Colony] +%d crystals added to storage (total: %d)",
-                    amount, this.crystalStorage));
+            System.out.println(String.format(
+                    "[Colony] +%d crystals added to storage (total: %d)",
+                    amount,
+                    this.crystalStorage
+            ));
         }
     }
 
-    /**
-     * 获取仓库中的水晶数量
-     */
     public int getCrystalsInStorage() {
         return this.crystalStorage;
     }
 
-    /**
-     * 从仓库中分配水晶给宇航员进行升级
-     * @return 分配是否成功
-     */
     public boolean allocateCrystalsToCrewMember(int crewId, int amount) {
         if (amount <= 0 || this.crystalStorage < amount) {
-            System.out.println(String.format("[Colony] Cannot allocate %d crystals (available: %d)",
-                    amount, this.crystalStorage));
+            System.out.println(String.format(
+                    "[Colony] Cannot allocate %d crystals (available: %d)",
+                    amount,
+                    this.crystalStorage
+            ));
             return false;
         }
 
@@ -184,19 +174,18 @@ public class Colony implements Serializable {
             return false;
         }
 
-        // 从仓库减少水晶
         this.crystalStorage -= amount;
-        // 给宇航员增加水晶
         crew.addSkillCrystals(amount);
 
-        System.out.println(String.format("[Colony] Allocated %d crystals to %s (storage now: %d)",
-                amount, crew.getName(), this.crystalStorage));
+        System.out.println(String.format(
+                "[Colony] Allocated %d crystals to %s (storage now: %d)",
+                amount,
+                crew.getName(),
+                this.crystalStorage
+        ));
         return true;
     }
 
-    /**
-     * 设置仓库水晶数量（用于初始化或测试）
-     */
     public void setCrystalsInStorage(int amount) {
         this.crystalStorage = Math.max(0, amount);
     }
