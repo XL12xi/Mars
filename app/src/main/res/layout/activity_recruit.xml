@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recruit Crew"
+            android:textAlignment="center"
+            android:textColor="@color/text_primary"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_recruit_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/surface"
+            android:padding="16dp"
+            android:textColor="@color/text_primary" />
+
+        <EditText
+            android:id="@+id/et_crew_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Crew name"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:padding="12dp"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_secondary" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Specialization"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/rg_specialization"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@color/surface"
+            android:checkedButton="@id/rb_pilot"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <RadioButton
+                android:id="@+id/rb_pilot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pilot" />
+
+            <RadioButton
+                android:id="@+id/rb_engineer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Engineer" />
+
+            <RadioButton
+                android:id="@+id/rb_medic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Medic" />
+
+            <RadioButton
+                android:id="@+id/rb_scientist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Scientist" />
+
+            <RadioButton
+                android:id="@+id/rb_soldier"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Soldier" />
+
+            <RadioButton
+                android:id="@+id/rb_robot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Robot" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/tv_role_stats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/surface"
+            android:padding="16dp"
+            android:textColor="@color/text_primary"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btn_create_crew"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Create Crew Member" />
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Back" />
+    </LinearLayout>
+</ScrollView>
